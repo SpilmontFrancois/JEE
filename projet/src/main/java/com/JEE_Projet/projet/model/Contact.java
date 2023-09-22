@@ -1,11 +1,11 @@
 package com.JEE_Projet.projet.model;
 
 import jakarta.persistence.*;
-
-import java.util.Date;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "contacts")
+@NoArgsConstructor
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,19 +34,4 @@ public class Contact {
 
     @Column(name = "living_country")
     private String livingCountry;
-
-    public Contact(String firstName, String lastName, String gender, String birthDate, String email, String phone, String originCountry, String livingCountry) {
-        this.firstname = firstName;
-        this.lastname = lastName;
-        this.gender = gender;
-        this.birthdate = birthDate;
-        this.email = email;
-        this.phone = phone;
-        this.originCountry = originCountry;
-        this.livingCountry = livingCountry;
-    }
-
-    public Contact() {
-
-    }
 }

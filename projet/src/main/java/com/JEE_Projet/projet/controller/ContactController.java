@@ -2,6 +2,7 @@ package com.JEE_Projet.projet.controller;
 
 import com.JEE_Projet.projet.model.Contact;
 import com.JEE_Projet.projet.service.ContactService;
+import com.JEE_Projet.projet.service.ContactServiceImplement;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,19 +14,18 @@ import java.util.List;
 public class ContactController {
     private final ContactService contactService;
 
-    @PostMapping("/create")
+    @PostMapping("")
     public Contact create(@RequestBody Contact contact) {
         return contactService.create(contact);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
         return contactService.delete(id);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("")
     public List<Contact> getAll() {
         return contactService.getAll();
     }
-
 }
