@@ -4,7 +4,9 @@ import com.JEE_Projet.projet.model.Contact;
 import com.JEE_Projet.projet.response.ResponseHandler;
 import com.JEE_Projet.projet.service.ContactService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -25,7 +27,8 @@ public class ContactController {
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     @Operation(summary = "Get all contacts")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the contacts")
+            @ApiResponse(responseCode = "200", description = "Found the contacts", content =  @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = "{\"data\": [{\"id\": 1,\"firstname\": \"John\",\"lastname\": \"Doe\",\"gender\": \"male\",\"birthdate\": \"1990-01-01\",\"email\": \"john.doe@example.com\",\"phone\": \"0123456789\",\"origin_country\": \"France\",\"living_country\": \"USA\"},{\"id\": 2,\"firstname\": \"Manuel\",\"lastname\": \"Lo\",\"gender\": \"male\",\"birthdate\": \"1997-04-25\",\"email\": \"manuello@example.com\",\"phone\": \"0167548189\",\"origin_country\": \"Spain\",\"living_country\": \"Portugal\"}],\"message\":\"Successfully fetched contacts\",\"status\": 200}"))),
     })
     public ResponseEntity<Object> getAll() {
         try {
@@ -40,8 +43,9 @@ public class ContactController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     @Operation(summary = "Get a contact by its id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the contact", content =  @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "404", description = "Contact not found", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Found the contact", content =  @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = "{\"data\": {\"id\": 1,\"firstname\": \"John\",\"lastname\": \"Doe\",\"gender\": \"male\",\"birthdate\": \"1990-01-01\",\"email\": \"john.doe@example.com\",\"phone\": \"0123456789\",\"origin_country\": \"France\",\"living_country\": \"USA\"},\"message\":\"Successfully fetched contact\",\"status\": 200}"))),
+            @ApiResponse(responseCode = "404", description = "Contact not found", content = @Content(mediaType = "application/json", examples = @ExampleObject(value = "{\"data\": null,\"message\":\"Contact not found\",\"status\": 404}")))
     })
     public ResponseEntity<Object> getOne(@PathVariable Integer id) {
         try {
@@ -60,7 +64,8 @@ public class ContactController {
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     @Operation(summary = "Create a new contact")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successfully created the contact", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Contact.class))),
+            @ApiResponse(responseCode = "201", description = "Successfully created the contact", content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = "{\"data\": {\"id\": 1,\"firstname\": \"John\",\"lastname\": \"Doe\",\"gender\": \"male\",\"birthdate\": \"1990-01-01\",\"email\": \"john.doe@example.com\",\"phone\": \"0123456789\",\"origin_country\": \"France\",\"living_country\": \"USA\"},\"message\":\"Successfully created contact\",\"status\": 200}"))),
             @ApiResponse(responseCode = "422", description = "Invalid input", content = @Content)
     })
     public ResponseEntity<Object> create(@RequestBody Contact contact) {
@@ -77,7 +82,7 @@ public class ContactController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
     @Operation(summary = "Delete a contact by its id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Successfully deleted the contact", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "204", description = "Successfully deleted the contact", content = @Content),
             @ApiResponse(responseCode = "404", description = "Contact not found", content = @Content)
     })
     public ResponseEntity<Object> delete(@PathVariable Integer id) {
