@@ -1,11 +1,16 @@
 package com.JEE_Projet.projet.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "contacts")
-@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +35,12 @@ public class Contact {
     private String phone;
 
     @Column(name = "origin_country")
-    private String originCountry;
+    private String origin_country;
 
     @Column(name = "living_country")
-    private String livingCountry;
+    private String living_country;
+
+    public Contact() {
+
+    }
 }
