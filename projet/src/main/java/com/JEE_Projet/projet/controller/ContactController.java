@@ -1,6 +1,7 @@
 package com.JEE_Projet.projet.controller;
 
 import com.JEE_Projet.projet.model.Contact;
+import com.JEE_Projet.projet.response.JsonResponse;
 import com.JEE_Projet.projet.service.ContactService;
 import com.JEE_Projet.projet.service.ContactServiceImplement;
 import lombok.AllArgsConstructor;
@@ -15,17 +16,29 @@ public class ContactController {
     private final ContactService contactService;
 
     @PostMapping("")
-    public Contact create(@RequestBody Contact contact) {
-        return contactService.create(contact);
+    public String create(@RequestBody Contact contact) {
+        try {
+            return JsonResponse.created(contactService.create(contact));
+        } catch (Exception e) {
+            return JsonResponse.error(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
-        return contactService.delete(id);
+        try {
+            return JsonResponse.deleted();
+        } catch (Exception e) {
+            return JsonResponse.error(e.getMessage());
+        }
     }
 
     @GetMapping("")
-    public List<Contact> getAll() {
-        return contactService.getAll();
+    public String getAll() {
+        try {
+            return JsonResponse.success(contactService.getAll());
+        } catch (Exception e) {
+            return JsonResponse.error(e.getMessage());
+        }
     }
 }
