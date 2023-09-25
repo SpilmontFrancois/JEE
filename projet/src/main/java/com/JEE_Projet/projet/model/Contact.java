@@ -3,7 +3,6 @@ package com.JEE_Projet.projet.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -40,7 +39,5 @@ public class Contact {
     @Column(name = "living_country")
     private String living_country;
 
-    public Contact() {
-
-    }
+    public Contact() {}
 }

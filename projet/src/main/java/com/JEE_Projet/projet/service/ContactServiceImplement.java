@@ -3,7 +3,6 @@ package com.JEE_Projet.projet.service;
 import com.JEE_Projet.projet.model.Contact;
 import com.JEE_Projet.projet.repository.ContactRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
