@@ -33,4 +33,9 @@ public class ContactServiceImplement implements ContactService{
     public Contact getOne(Integer id) {
         return contactRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public List<Contact> search(String search) {
+        return contactRepository.findAllByFirstnameContainingOrLastnameContaining(search, search);
+    }
 }
