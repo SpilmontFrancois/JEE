@@ -40,4 +40,6 @@ public class Contact {
     private String living_country;
 
     public Contact() {}
+
+
 }

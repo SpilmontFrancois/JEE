@@ -45,4 +45,15 @@ public class ContactController {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
         }
     }
+
+    //route for fetch one contact
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOne(@PathVariable Integer id) {
+        try {
+            Contact result = contactService.getOne(id);
+            return ResponseHandler.generateResponse("Successfully fetched contact", HttpStatus.OK, result);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+        }
+    }
 }

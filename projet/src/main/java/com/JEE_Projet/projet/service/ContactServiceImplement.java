@@ -28,4 +28,9 @@ public class ContactServiceImplement implements ContactService{
     public List<Contact> getAll() {
         return contactRepository.findAll();
     }
+
+    @Override
+    public Contact getOne(Integer id) {
+        return contactRepository.findById(id).orElse(null);
+    }
 }
