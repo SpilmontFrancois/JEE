@@ -1,10 +1,11 @@
 package com.JEE_Projet.projet.controller;
 
 import com.JEE_Projet.projet.model.Contact;
-import com.JEE_Projet.projet.response.JsonResponse;
+import com.JEE_Projet.projet.response.ResponseHandler;
 import com.JEE_Projet.projet.service.ContactService;
-import com.JEE_Projet.projet.service.ContactServiceImplement;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,29 +17,32 @@ public class ContactController {
     private final ContactService contactService;
 
     @PostMapping("")
-    public String create(@RequestBody Contact contact) {
+    public ResponseEntity<Object> create(@RequestBody Contact contact) {
         try {
-            return JsonResponse.created(contactService.create(contact));
+            Contact result = contactService.create(contact);
+            return ResponseHandler.generateResponse("Successfully created contact", HttpStatus.CREATED, result);
         } catch (Exception e) {
-            return JsonResponse.error(e.getMessage());
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
         }
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Integer id) {
+    public ResponseEntity<Object> delete(@PathVariable Integer id) {
         try {
-            return JsonResponse.deleted();
+            String result = contactService.delete(id);
+            return ResponseHandler.generateResponse("Successfully deleted contact", HttpStatus.NO_CONTENT, result);
         } catch (Exception e) {
-            return JsonResponse.error(e.getMessage());
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
         }
     }
 
     @GetMapping("")
-    public String getAll() {
+    public ResponseEntity<Object> getAll() {
         try {
-            return JsonResponse.success(contactService.getAll());
+            List<Contact> result = contactService.getAll();
+            return ResponseHandler.generateResponse("Successfully fetched contacts", HttpStatus.OK, result);
         } catch (Exception e) {
-            return JsonResponse.error(e.getMessage());
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
         }
     }
 }
