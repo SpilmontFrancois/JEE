@@ -99,16 +99,16 @@ public class ContactController {
     }
 
     @GetMapping("/search")
-    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/search?q=example", method = RequestMethod.GET, produces = "application/json")
     @Operation(summary = "Search for a contact by its firstname, lastname")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found the contact(s)", content = @Content(mediaType = "application/json",
                     examples = @ExampleObject(value = "{\"data\": [{\"id\": 1,\"firstname\": \"John\",\"lastname\": \"Doe\",\"gender\": \"male\",\"birthdate\": \"1990-01-01\",\"email\": \"john.doe@example.com\",\"phone\": \"0123456789\",\"origin_country\": \"France\",\"living_country\": \"USA\"},{\"id\": 2,\"firstname\": \"Manuel\",\"lastname\": \"Lo\",\"gender\": \"male\",\"birthdate\": \"1997-04-25\",\"email\": \"manuello@example.com\",\"phone\": \"0167548189\",\"origin_country\": \"Spain\",\"living_country\": \"Portugal\"}],\"message\":\"Successfully fetched contacts\",\"status\": 200}"))),
             @ApiResponse(responseCode = "404", description = "Contact not found", content = @Content)
     })
-    public ResponseEntity<Object> search(@RequestParam String search) {
+    public ResponseEntity<Object> search(@RequestParam String q) {
         try {
-            List<Contact> result = contactService.search(search);
+            List<Contact> result = contactService.search(q);
 
             if (result.isEmpty())
                 return ResponseHandler.generateResponse("Contact not found", HttpStatus.NOT_FOUND, null);
