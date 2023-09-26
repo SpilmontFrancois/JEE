@@ -11,4 +11,8 @@ public interface ContactService {
     String delete(Integer id);
 
     List<Contact> getAll();
+
+    Contact getOne(Integer id);
+
+    List<Contact> search(String search);
 }
