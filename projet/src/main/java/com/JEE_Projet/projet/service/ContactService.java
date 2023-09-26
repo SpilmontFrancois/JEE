@@ -12,7 +12,5 @@ public interface ContactService {
 
     List<Contact> getAll();
 
-    Contact getOne(Integer id);
-
     List<Contact> search(String search);
 }
