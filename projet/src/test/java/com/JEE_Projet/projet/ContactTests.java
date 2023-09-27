@@ -2,6 +2,7 @@ package com.JEE_Projet.projet;
 import com.JEE_Projet.projet.model.Contact;
 import com.JEE_Projet.projet.repository.ContactRepository;
 import com.JEE_Projet.projet.service.ContactService;
+import com.JEE_Projet.projet.service.ContactServiceImplement;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,7 +20,7 @@ public class ContactTests {
 	private ContactRepository contactRepository;
 
 	@InjectMocks
-	private ContactService contactService;
+	private ContactServiceImplement contactServiceImplement;
 
 
 	@Test
