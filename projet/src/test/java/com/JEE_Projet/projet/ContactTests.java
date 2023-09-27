@@ -24,7 +24,7 @@ public class ContactTests {
 
 
 	@Test
-	void testget(){
+	void testContactCreate(){
 
 		Contact cTest= new Contact(1,"Spill","François","MALE","01/01/2000","lulu@home.fr","06060606","Français","France");
 		//then

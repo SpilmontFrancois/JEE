@@ -25,7 +25,7 @@ import java.util.List;
 public class ContactController {
     private final ContactService contactService;
 
-    @GetMapping("")
+    @GetMapping({"","/"})
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     @Operation(summary = "Get all contacts")
     @ApiResponses(value = {
@@ -41,7 +41,7 @@ public class ContactController {
         }
     }
 
-    @PostMapping("")
+    @PostMapping({"","/"})
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     @Operation(summary = "Create a new contact")
     @ApiResponses(value = {

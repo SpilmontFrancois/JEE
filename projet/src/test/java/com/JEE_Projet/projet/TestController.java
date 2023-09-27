@@ -1,9 +1,9 @@
 package com.JEE_Projet.projet;
-
+;
 import com.JEE_Projet.projet.model.Contact;
 import com.JEE_Projet.projet.repository.ContactRepository;
 
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import java.net.URL;
 import java.time.LocalDate;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestController {
@@ -44,9 +44,8 @@ public class TestController {
         contact.setPhone("0504030201");
         personRepository.save(contact);
         ResponseEntity<Contact> response = restTemplate
-                .getForEntity(new URL(url ).toString(), Contact.class); //when
+                .getForEntity(new URL(url).toString(), Contact.class); //when
         assertNotNull(response.getBody()); //then
-
 
     }
     @Test
@@ -54,21 +53,19 @@ public class TestController {
             Contact contact = new Contact();
             contact.setFirstname("Jane");
             contact.setLastname("DOE");
-            ResponseEntity<?> response = restTemplate.postForEntity(new URL(url ).toString(),contact, String.class);
+            ResponseEntity<?> response = restTemplate.postForEntity(new URL(url).toString(),contact, String.class);
             assertNotNull(response);
             assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
 
     }
     @Test
     public void testCreatePerson() throws Exception {
-        Contact contact = new Contact();
-        contact.setFirstname("Jane");
-        contact.setLastname("DOE");
-        ResponseEntity<?> response = restTemplate.postForEntity(new URL(url ).toString(),contact, String.class);
-        assertNotNull(response);
-        assertEquals(HttpStatus.CREATED,response.getStatusCode());
 
+        Contact contact = new Contact(1,"Spill","François","MALE","01/01/2000","lulu@home.fr","06060606","Français","France");
+        io.restassured.RestAssured.given().header("Content-Type","application/json").body(contact).log().all().when().request("POST",url).then()
+                .log().all().statusCode(201);
 
     }
+
 
 }
