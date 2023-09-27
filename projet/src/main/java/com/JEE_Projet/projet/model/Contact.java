@@ -2,6 +2,8 @@ package com.JEE_Projet.projet.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +32,7 @@ public class Contact {
 
     @Column(name = "birthdate")
     @NotBlank(message = "Birthdate is mandatory")
+    @Past
     private String birthdate;
 
     @Column(name = "email")
@@ -38,6 +41,7 @@ public class Contact {
 
     @Column(name = "phone")
     @NotBlank(message = "Phone is mandatory")
+    @Size(min = 10,max = 10)
     private String phone;
 
     @Column(name = "origin_country")
